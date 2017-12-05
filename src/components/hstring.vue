@@ -1,5 +1,5 @@
 <template>
-  <vddl-list class="string rounded border-secondary" :list="string.wordList" :horizontal="true" :class="{ok: isCompleted }">
+  <vddl-list class="string rounded border-secondary" :list="string.wordList" :horizontal="true" :class="{ok: isCompleted }" :inserted="inserted">
     <word v-for="(word, index) in string.wordList" :word="word" :key="word.key" :index="index" :wrapper="string.wordList"></word>
   </vddl-list>
 </template>
@@ -22,6 +22,11 @@
     watch: {
       isCompleted: function (newValue) {
         this.$emit("update", newValue)
+      }
+    },
+    methods: {
+      inserted() {
+        this.$emit('inserted')
       }
     }
   }
