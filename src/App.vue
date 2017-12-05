@@ -18,6 +18,7 @@
 <script>
   import Word from "./components/word"
   import HString from "./components/hstring"
+  import $ from 'jquery'
 
   export default {
     data() {
@@ -40,23 +41,17 @@
             "numOfSylls": 5,
             "id": 3
           }
-        ], wordList: [
-          {word: 'dwerkhsd', key: 1, count: 1},
-          {word: 'pop', key: 2, count: 1},
-          {word: 'meow', key: 3, count: 2},
-          {word: 'fandango', key: 4, count: 3},
-          {word: 'dwerkhsd', key: 5, count: 1},
-          {word: 'pop', key: 6, count: 1},
-          {word: 'meow', key: 7, count: 2},
-          {word: 'fandango', key: 8, count: 3},
-          {word: 'dwerkhsd', key: 9, count: 1},
-          {word: 'pop', key: 10, count: 1},
-          {word: 'meow', key: 11, count: 2},
-          {word: 'fandango', key: 12, count: 3}
-        ]
+        ], wordList: []
       }
     },
     components: {Word, HString},
+    created: function(){
+      var self = this
+      $.getJSON('/data/words.json',function(json){
+        self.$set(self, 'wordList', json)
+        //Vue.set(vm.this, 'wordList', json)
+      });
+    },
     methods: {
       droppedIn: function() {
         this.$refs.wordIn.play()
