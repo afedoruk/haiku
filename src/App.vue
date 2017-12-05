@@ -2,9 +2,14 @@
   <div>
     <h-string v-for="string in strings" :string="string" @update="detectCompleteness" :key="string.id" v-on:inserted="droppedIn"></h-string>
     <vddl-list class="pool" :list="wordList" :horizontal="true" :inserted="droppedOut">
-      <word v-for="(word, index) in wordList" :word="word" :key="word.key" :index="index" :wrapper="wordList"></word>
+      <word v-for="(word, index) in wordList" :word="word" :key="word.key" :index="index" :wrapper="wordList"  v-show="word.group == screenNum"></word>
     </vddl-list>
-
+    <p>
+      <button v-on:click="moreWords"  class="btn btn-dark">
+        More words
+      </button>
+      <button v-if="isComplete" type="button" class="btn btn-warning" v-on:click="speakFromMyHeart">Let me speak from my heart!</button>
+    </p>
     <audio ref="wordIn" src="media/word_in.ogg"></audio>
     <audio ref="wordOut" src="media/word_out.ogg"></audio>
     <audio ref="lineBroken" src="media/line_broken.ogg"></audio>
@@ -41,7 +46,10 @@
             "numOfSylls": 5,
             "id": 3
           }
-        ], wordList: []
+        ],
+        wordList: [],
+        screenNum: 1,
+        maxScreenNum: 7
       }
     },
     components: {Word, HString},
@@ -49,10 +57,16 @@
       var self = this
       $.getJSON('/data/words.json',function(json){
         self.$set(self, 'wordList', json)
-        //Vue.set(vm.this, 'wordList', json)
       });
     },
     methods: {
+      moreWords: function () {
+        if (this.screenNum < this.maxScreenNum) {
+          this.screenNum++
+        } else {
+          this.screenNum = 1
+        }
+      },
       droppedIn: function() {
         this.$refs.wordIn.play()
       },
@@ -83,7 +97,7 @@
 <style>
   .pool {
     max-width: 800px;
-    min-height: 200px;
+    min-height: 250px;
     padding-top: 30px;
     padding-bottom: 30px;
   }
