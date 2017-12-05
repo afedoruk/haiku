@@ -10,19 +10,20 @@
       </button>
       <button v-if="isComplete" type="button" class="btn btn-warning" v-on:click="speakFromMyHeart">Let me speak from my heart!</button>
     </p>
+    <player v-bind:file='"/media/koto_cut_reverb_normalize-10db.ogg"'></player>
     <audio ref="wordIn" src="media/word_in.ogg"></audio>
     <audio ref="wordOut" src="media/word_out.ogg"></audio>
     <audio ref="lineBroken" src="media/line_broken.ogg"></audio>
     <audio ref="lines1Completed" src="media/1line.ogg"></audio>
     <audio ref="lines2Completed" src="media/2lines.ogg"></audio>
     <audio ref="lines3Completed" src="media/3lines.ogg"></audio>
-    <!--audio src="media/koto_cut_reverb_normalize-10db.ogg" loop autoplay id="music-player"-->
   </div>
 </template>
 
 <script>
   import Word from "./components/word"
   import HString from "./components/hstring"
+  import Player from "./components/player"
   import $ from 'jquery'
 
   export default {
@@ -52,7 +53,7 @@
         maxScreenNum: 7
       }
     },
-    components: {Word, HString},
+    components: {Word, HString, Player},
     created: function(){
       var self = this
       $.getJSON('/data/words.json',function(json){
