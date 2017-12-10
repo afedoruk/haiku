@@ -19,11 +19,12 @@
       glueText: function(words) {
         var msgTxt = "";
         words.forEach(function(item) {
-          if (item.word != "s") {
+          if (!["s", "ed", "y", "r", "ly", "est"].includes(item.word)) {
             msgTxt += " "
           }
           msgTxt += item.word
         })
+        console.log(msgTxt)
         return msgTxt
       },
       speakPolly: function (gluedStrings) {

@@ -9,8 +9,7 @@
         More words
       </button>
 
-      <speak-from-my-heart :strings="strings">
-        <!--v-if="isComplete"-->
+      <speak-from-my-heart :strings="strings" v-if="isComplete">
       </speak-from-my-heart>
     </p>
     <player v-bind:file='"/media/koto_cut_reverb_normalize-10db.ogg"'></player>

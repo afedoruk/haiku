@@ -22,7 +22,6 @@
           this.$refs.player.play()
           this.music = true
         }
-        console.log('toggle')
       }
     }
   }
