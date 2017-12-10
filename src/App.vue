@@ -8,7 +8,10 @@
       <button v-on:click="moreWords"  class="btn btn-dark">
         More words
       </button>
-      <button v-if="isComplete" type="button" class="btn btn-warning" v-on:click="speakFromMyHeart">Let me speak from my heart!</button>
+
+      <speak-from-my-heart :strings="strings">
+        <!--v-if="isComplete"-->
+      </speak-from-my-heart>
     </p>
     <player v-bind:file='"/media/koto_cut_reverb_normalize-10db.ogg"'></player>
     <audio ref="wordIn" src="media/word_in.ogg"></audio>
@@ -24,6 +27,7 @@
   import Word from "./components/word"
   import HString from "./components/hstring"
   import Player from "./components/player"
+  import SpeakFromMyHeart from "./components/speakFromMyHeart"
   import $ from 'jquery'
 
   export default {
@@ -53,7 +57,7 @@
         maxScreenNum: 7
       }
     },
-    components: {Word, HString, Player},
+    components: {Word, HString, Player, SpeakFromMyHeart},
     created: function(){
       var self = this
       $.getJSON('/data/words.json',function(json){
