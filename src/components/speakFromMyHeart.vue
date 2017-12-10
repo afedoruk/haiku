@@ -28,19 +28,8 @@
       },
       speakPolly: function (gluedStrings) {
         var msgTxt = gluedStrings.join("<break time='1s'/>")
-        var awsCredentials = new AWS.Credentials("", "");
-        var settings = {
-          awsCredentials: awsCredentials,
-          awsRegion: "eu-west-1",
-          pollyVoiceId: "Joey",
-          cacheSpeech: true
-        }
-        var kathy = ChattyKathy(settings);
-        console.log(msgTxt)
-        kathy.Speak('<prosody rate="x-slow">'+msgTxt+'</prosody>')
-        if (kathy.IsSpeaking()) {
-          kathy.ShutUp();
-        }
+        var a = new Audio("https://haiku2-back.herokuapp.com/?text="+msgTxt);
+        a.play();
       },
       speakBrowser: function (gluedStrings) {
         var msgTxt = gluedStrings.join(' ')
