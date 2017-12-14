@@ -19,7 +19,7 @@
       glueText: function(words) {
         var msgTxt = "";
         words.forEach(function(item) {
-          if (!["s", "ed", "y", "r", "ly", "est"].includes(item.word)) {
+          if (!["s", "ed", "y", "r", "ly", "est", "ing"].includes(item.word)) {
             msgTxt += " "
           }
           msgTxt += item.word
