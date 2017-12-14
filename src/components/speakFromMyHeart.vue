@@ -13,8 +13,8 @@
         this.strings.forEach(function (item) {
           gluedStrings.push(self.glueText(item.wordList))
         });
-        this.speakPolly(gluedStrings)
-    //    this.speakBrowser(gluedStrings)
+     //   this.speakPolly(gluedStrings)
+        this.speakBrowser(gluedStrings)
       },
       glueText: function(words) {
         var msgTxt = "";
